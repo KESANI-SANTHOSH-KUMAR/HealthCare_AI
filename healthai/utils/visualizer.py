@@ -6,14 +6,14 @@ from utils.ai import prompt_simple_summary
 def display_health_analytics(df=None):
     st.title("🩺 Health Analytics Dashboard")
            
-            st.subheader("📊 Raw Data")
-            st.dataframe(df, use_container_width=True)
+    st.subheader("📊 Raw Data")
+    st.dataframe(df, use_container_width=True)
 
-            st.subheader("📈 Data Summary")
-            st.write(df.describe(include='all'))
+    st.subheader("📈 Data Summary")
+    st.write(df.describe(include='all'))
 
-            numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns.tolist()
-            categorical_cols = df.select_dtypes(include=['object', 'category']).columns.tolist()
+    numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns.tolist()
+    categorical_cols = df.select_dtypes(include=['object', 'category']).columns.tolist()
 
             if 'Date' in df.columns and len(numeric_cols) > 0:
                 st.subheader("📈 Time Series Charts")
