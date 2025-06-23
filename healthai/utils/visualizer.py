@@ -6,15 +6,7 @@ from utils.ai import prompt_simple_summary
 def display_health_analytics(df=None):
     st.title("🩺 Health Analytics Dashboard")
 
-    uploaded_file = st.file_uploader("Upload your health data (CSV or Excel)", type=['csv', 'xlsx'])
-
-    if uploaded_file is not None:
-        try:
-            # 🔹 Load file
-            if uploaded_file.name.endswith('.csv'):
-                df = pd.read_csv(uploaded_file)
-            else:
-                df = pd.read_excel(uploaded_file)
+    
 
             st.success("✅ File uploaded successfully!")
             st.subheader("📊 Raw Data")
