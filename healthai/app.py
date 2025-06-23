@@ -57,4 +57,8 @@ elif menu == "Health Analytics":
                 df = pd.read_csv(uploaded_file)
             else:
                 df = pd.read_excel(uploaded_file)
-    display_health_analytics(df)
+            
+            display_health_analytics(df)
+        
+        except Exception as e:
+            st.error(f"Error loading file: {e}")
