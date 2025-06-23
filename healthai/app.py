@@ -49,5 +49,12 @@ elif menu == "Treatment Plan":
         st.write(plan)
 
 elif menu == "Health Analytics":
-    df = pd.read_csv("data/patient_data.csv")
-    display_health_analytics(df) # i want to modify display
+    uploaded_file = st.file_uploader("Upload your health data (CSV or Excel)", type=['csv', 'xlsx'])
+
+    if uploaded_file is not None:
+        try:
+            if uploaded_file.name.endswith('.csv'):
+                df = pd.read_csv(uploaded_file)
+            else:
+                df = pd.read_excel(uploaded_file)
+    display_health_analytics(df)
