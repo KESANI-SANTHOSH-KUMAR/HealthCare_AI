@@ -9,7 +9,7 @@ API_KEY = os.getenv("AI_API_KEY") or st.secrets("AI_API_KEY")
 WML_URL = os.getenv("AI_URL") or st.secrets("AI_URL")
 PROJECT_ID = os.getenv("AI_PROJECT_ID") or st.secrets("AI_PROJECT_ID")
 
-def get_ai_response(prompt):
+def get_ai_response(prompt,token):
     token_url = "https://iam.cloud.ibm.com/identity/token"
     print("🔐 Getting access token...")
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
@@ -38,7 +38,7 @@ def get_ai_response(prompt):
         # },
         "parameters": {
             "decoding_method": "greedy",    
-            "max_new_tokens": 150           # Longer output
+            "max_new_tokens":token           # Longer output
         },
         "project_id": PROJECT_ID  
     }
@@ -69,11 +69,13 @@ List top 3 possible diagnoses with estimated likelihoods in percentage format. E
     - Flu: 25%
     - COVID-19: 10%
     """
-    return get_ai_response(prompt)
+    token=200
+    return get_ai_response(prompt,token)
 
 def generate_treatment_plan(disease):
     prompt = f"Suggest a treatment plan for the disease: {disease}."
-    return get_ai_response(prompt)
+    token=400
+    return get_ai_response(prompt,token)
 
 
 # if __name__ == "__main__":
@@ -93,5 +95,6 @@ def prompt_simple_summary(df):
         f"{desc}\n\n"
         "Please write a short and easy-to-understand paragraph summarizing the key points in this data for a doctor."
     )
+    token=400
 
-    return get_ai_response(prompt)
+    return get_ai_response(prompt,token)
