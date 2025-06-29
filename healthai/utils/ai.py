@@ -26,7 +26,7 @@ def get_ai_response(prompt):
     print("✅ Access token received")
     print("🚀 Sending prompt to Granite model...")
 
-    model_id = "ibm/granite-13b-instruct-v2"
+    model_id = "ibm/granite-3-2b-instruct"
     inference_url = f"{WML_URL}/ml/v1/text/generation?version=2024-05-01"
 
     payload = {
@@ -37,11 +37,8 @@ def get_ai_response(prompt):
         #     "max_new_tokens": 500
         # },
         "parameters": {
-            "decoding_method": "greedy",    # Better than "greedy"
-            "temperature": 0.7,               # Controls creativity
-            "top_k": 50,                      # Top K sampling
-            "top_p": 0.95,                    # Nucleus sampling
-            "max_new_tokens": 500             # Longer output
+            "decoding_method": "greedy",    
+            "max_new_tokens": 150           # Longer output
         },
         "project_id": PROJECT_ID  
     }
@@ -62,7 +59,16 @@ def get_ai_response(prompt):
 #     print("🤖 Response:", response)
 
 def predict_disease(symptoms):
-    prompt = f"A patient has the following symptoms: {symptoms}. What is the most likely diagnosis? "
+    prompt =  f"""
+A patient is experiencing the following symptoms: {symptoms}.
+
+Please consider the most common and likely causes first, based on global clinical guidelines. Avoid listing rare or severe diseases unless strongly indicated.
+
+List top 3 possible diagnoses with estimated likelihoods in percentage format. Example:
+    - Common Cold: 60%
+    - Flu: 25%
+    - COVID-19: 10%
+    """
     return get_ai_response(prompt)
 
 def generate_treatment_plan(disease):
