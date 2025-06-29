@@ -37,7 +37,7 @@ if "profile" not in st.session_state:
 col1, col2 = st.columns([1, 2])
 
 with col1:
-    st.markdown("## 👤 Patient Profile")
+    st.markdown("## 🙍 Patient Profile")
     with st.form("profile_form"):
         name = st.text_input("Name", st.session_state.profile.get("name", ""))
         age = st.number_input("Age", min_value=0, max_value=120, step=1, value=st.session_state.profile.get("age", 30))
