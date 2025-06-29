@@ -28,7 +28,50 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+if "profile" not in st.session_state:
+    st.session_state.profile = {}
 
+
+col1, col2 = st.columns([1, 2])
+
+with col1:
+    st.markdown("## 👤 Patient Profile")
+    with st.form("profile_form"):
+        name = st.text_input("Name", st.session_state.profile.get("name", ""))
+        age = st.number_input("Age", min_value=0, max_value=120, step=1, value=st.session_state.profile.get("age", 30))
+        gender = st.selectbox("Gender", ["Male", "Female", "Other"], index=["Male", "Female", "Other"].index(st.session_state.profile.get("gender", "Male")))
+        history = st.text_area("Medical History", st.session_state.profile.get("history", ""))
+        medications = st.text_area("Current Medications", st.session_state.profile.get("medications", ""))
+        allergies = st.text_input("Allergies", st.session_state.profile.get("allergies", ""))
+
+        submitted = st.form_submit_button("💾 Save Profile")
+        if submitted:
+            st.session_state.profile = {
+                "name": name,
+                "age": age,
+                "gender": gender,
+                "history": history,
+                "medications": medications,
+                "allergies": allergies
+            }
+            st.success("✅ Profile saved!")
+
+    if st.session_state.profile:
+        st.markdown("#### 🧾 Saved Info")
+        st.json(st.session_state.profile)
+
+
+with col2:
+
+    profile = st.session_state.profile
+    profile_summary = f"""
+    Patient Info:
+    - Age: {profile.get('age')}
+    - Gender: {profile.get('gender')}
+    - History: {profile.get('history')}
+    - Medications: {profile.get('medications')}
+    - Allergies: {profile.get('allergies')}
+    """
 st.title("🧠 AI-Powered Healthcare Assistant")
 
 
