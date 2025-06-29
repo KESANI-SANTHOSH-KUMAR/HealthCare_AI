@@ -87,7 +87,18 @@ with col2:
     
     if menu == "Patient Chat":
        user_input = st.text_area("Enter your health concern:")
-       prompt=f"{user_input}"
+       prompt=f"""You are HealthAI, an intelligent and safe AI medical assistant. Respond clearly using bullet points. Be medically accurate, empathetic, and concise.
+
+Instructions:
+- If symptoms are minor: give home remedies and self-care tips.
+- If symptoms are serious: recommend seeing a healthcare provider.
+- Avoid vague or blog-style answers.
+- Do not make a diagnosis here.
+
+Patient's message:{user_input}
+
+Your response (clear advice in bullet points):
+"""
        token=300
        if st.button("Know what is the problem"):
           response = get_ai_response(prompt,token)
