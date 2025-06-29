@@ -60,20 +60,41 @@ def get_ai_response(prompt,token):
 
 def predict_disease(symptoms):
     prompt =  f"""
-A patient is experiencing the following symptoms: {symptoms}.
+You are HealthAI, a medically accurate and safe AI assistant. A patient describes their symptoms.
 
-Please consider the most common and likely causes first, based on global clinical guidelines. Avoid listing rare or severe diseases unless strongly indicated.
+Symptoms: {symptoms}
 
-List top 3 possible diagnoses with estimated likelihoods in percentage format. Example:
-    - Common Cold: 60%
-    - Flu: 25%
-    - COVID-19: 10%
+Based on these symptoms, list the **top 3 most likely common diseases** (not rare ones), ordered by estimated likelihood. Be realistic.
+
+Format:
+Top 3 likely diagnoses with estimated likelihoods:
+1. [Most likely disease]: 70%
+2. [Second most likely disease]: 20%
+3. [Less likely disease]: 10%
+
+Only include diseases that match the given symptoms and are likely in general population.
+
     """
     token=200
     return get_ai_response(prompt,token)
 
 def generate_treatment_plan(disease):
-    prompt = f"Suggest a treatment plan for the disease: {disease}."
+    prompt = f"""You are HealthAI, a professional AI healthcare assistant.
+
+A patient is affected by the following disease: **{disease}**
+
+Provide a guideline-based treatment plan suitable for outpatient care. Keep the response concise, safe, and medically accurate.
+
+Format:
+**Disease**: {disease}
+
+**Treatment Plan**:
+1. [First-line treatment or medication]
+2. [Supportive advice or lifestyle changes]
+3. [When to consult a doctor or specialist]
+
+Avoid unproven, experimental, or off-label treatments. Follow established clinical standards and safety practices.
+"""
     token=400
     return get_ai_response(prompt,token)
 
