@@ -74,8 +74,6 @@ with col2:
     - Medications: {profile.get('medications')}
     - Allergies: {profile.get('allergies')}
     """
-    st.title("🧠 AI-Powered Healthcare Assistant")
-    
     
     menu = st.sidebar.selectbox("Navigation", [
       "Patient Chat",
