@@ -59,6 +59,7 @@ def get_ai_response(prompt,token):
 #     print("🤖 Response:", response)
 
 def predict_disease(symptoms):
+    st.title("🧠 Disease Prediction")
     prompt =  f"""
 You are HealthAI, a medically accurate and safe AI assistant. A patient describes their symptoms.
 
@@ -79,6 +80,7 @@ Only include diseases that match the given symptoms and are likely in general po
     return get_ai_response(prompt,token)
 
 def generate_treatment_plan(disease):
+    st.title("📝 Treatment Plan")
     prompt = f"""You are HealthAI, a professional AI healthcare assistant.
 
 A patient is affected by the following disease: **{disease}**
