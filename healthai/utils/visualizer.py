@@ -4,7 +4,6 @@ import plotly.express as px
 from utils.ai import prompt_simple_summary
 
 def display_health_analytics(df=None):
-    st.title("🩺 Health Analytics Dashboard")
     
     if df is not None:
         try:
