@@ -72,50 +72,50 @@ with col2:
     - Medications: {profile.get('medications')}
     - Allergies: {profile.get('allergies')}
     """
-st.title("🧠 AI-Powered Healthcare Assistant")
+    st.title("🧠 AI-Powered Healthcare Assistant")
 
 
-menu = st.sidebar.selectbox("Navigation", [
+    menu = st.sidebar.selectbox("Navigation", [
     "Patient Chat",
     "Disease Prediction",
     "Treatment Plan",
     "Health Analytics"
-])
+   ])
+   
+   
+   if menu == "Patient Chat":
+      user_input = st.text_area("Enter your health concern:")
+      prompt=f"{user_input}"
+      token=300
+      if st.button("Know what is the problem"):
+         response = get_ai_response(prompt,token)
+         cleaned = response.replace("<human>:", "").replace("<bot>:", "").strip()
+         st.success(cleaned)
+   
+   elif menu == "Disease Prediction":
+      symptoms = st.text_input("Enter symptoms (comma-separated):")
+      if st.button("Predict Disease"):
+         result = predict_disease(symptoms)
+         st.info(result)
+   
+   elif menu == "Treatment Plan":
+      disease = st.text_input("Enter diagnosed disease:")
+      if st.button("Get Treatment Plan"):
+         plan = generate_treatment_plan(disease)
+         st.write(plan)
 
 
-if menu == "Patient Chat":
-    user_input = st.text_area("Enter your health concern:")
-    prompt=f"{user_input}"
-    token=300
-    if st.button("Know what is the problem"):
-        response = get_ai_response(prompt,token)
-        cleaned = response.replace("<human>:", "").replace("<bot>:", "").strip()
-        st.success(cleaned)
+   elif menu == "Health Analytics":
+      uploaded_file = st.file_uploader("Upload your health data (CSV or Excel)", type=['csv', 'xlsx'])
 
-elif menu == "Disease Prediction":
-    symptoms = st.text_input("Enter symptoms (comma-separated):")
-    if st.button("Predict Disease"):
-        result = predict_disease(symptoms)
-        st.info(result)
+      if uploaded_file is not None:
+         try:
+             if uploaded_file.name.endswith('.csv'):
+                 df = pd.read_csv(uploaded_file)
+             else:
+                 df = pd.read_excel(uploaded_file)
+ 
+             display_health_analytics(df)
 
-elif menu == "Treatment Plan":
-    disease = st.text_input("Enter diagnosed disease:")
-    if st.button("Get Treatment Plan"):
-        plan = generate_treatment_plan(disease)
-        st.write(plan)
-
-
-elif menu == "Health Analytics":
-    uploaded_file = st.file_uploader("Upload your health data (CSV or Excel)", type=['csv', 'xlsx'])
-
-    if uploaded_file is not None:
-        try:
-            if uploaded_file.name.endswith('.csv'):
-                df = pd.read_csv(uploaded_file)
-            else:
-                df = pd.read_excel(uploaded_file)
-
-            display_health_analytics(df)
-
-        except Exception as e:
-            st.error(f"Error loading file: {e}")
+         except Exception as e:
+             st.error(f"Error loading file: {e}")
