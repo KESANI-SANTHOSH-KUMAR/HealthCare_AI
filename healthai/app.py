@@ -84,6 +84,7 @@ with col2:
     
     
     if menu == "Patient Chat":
+       st.title("🗨️ Patient Chat")
        user_input = st.text_area("Enter your health concern:")
        prompt=f"""You are HealthAI, an intelligent and safe AI medical assistant. Respond clearly using bullet points. Be medically accurate, empathetic, and concise.
 
