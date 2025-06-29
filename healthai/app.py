@@ -105,12 +105,14 @@ Your response (clear advice in bullet points):
           st.success(cleaned)
    
     elif menu == "Disease Prediction":
+       st.title("🧠 Disease Prediction")
        symptoms = st.text_input("Enter symptoms (comma-separated):")
        if st.button("Predict Disease"):
           result = predict_disease(symptoms)
           st.info(result)
    
     elif menu == "Treatment Plan":
+       st.title("📝 Treatment Plan")
        disease = st.text_input("Enter diagnosed disease:")
        if st.button("Get Treatment Plan"):
           plan = generate_treatment_plan(disease)
@@ -118,6 +120,7 @@ Your response (clear advice in bullet points):
 
 
     elif menu == "Health Analytics":
+       st.title("🩺 Health Analytics Dashboard")
        uploaded_file = st.file_uploader("Upload your health data (CSV or Excel)", type=['csv', 'xlsx'])
 
        if uploaded_file is not None:
