@@ -4,7 +4,9 @@ from utils.ai import get_ai_response, predict_disease, generate_treatment_plan
 from utils.visualizer import display_health_analytics
 
 
-st.set_page_config(page_title="AI Health Assistant", layout="wide")
+#st.set_page_config(page_title="AI Health Assistant", layout="wide")
+st.set_page_config(page_title="🧠 HealthAI", layout="wide")
+st.markdown("<h1 style='text-align: center;'>🩺 HealthAI - Intelligent Healthcare Assistant</h1>", unsafe_allow_html=True)
 
 st.markdown("""
     <style>
