@@ -85,8 +85,10 @@ menu = st.sidebar.selectbox("Navigation", [
 
 if menu == "Patient Chat":
     user_input = st.text_area("Enter your health concern:")
+    prompt=f"{user_input}"
+    token=300
     if st.button("Know what is the problem"):
-        response = get_ai_response(user_input)
+        response = get_ai_response(prompt,token)
         cleaned = response.replace("<human>:", "").replace("<bot>:", "").strip()
         st.success(cleaned)
 
