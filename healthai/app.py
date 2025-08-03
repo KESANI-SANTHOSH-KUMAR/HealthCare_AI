@@ -56,7 +56,7 @@ with col1:
                 "medications": medications,
                 "allergies": allergies
             }
-            st.success("✅ Profile saved!")
+            st.success("Profile saved!")
 
     if st.session_state.profile:
         st.markdown("#### 🧾 Saved Info")
